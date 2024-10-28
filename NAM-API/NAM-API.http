@@ -1,0 +1,6 @@
+@NAM_API_HostAddress = http://localhost:5281
+
+GET {{NAM_API_HostAddress}}/api/portfolios/
+Accept: application/json
+
+###

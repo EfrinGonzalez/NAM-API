@@ -1,0 +1,10 @@
+one in the directory 
+
+set server app name
+$env:FLASK_APP="server.py"
+
+then
+pip show flask
+
+then 
+python -m flask run
