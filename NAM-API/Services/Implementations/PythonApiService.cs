@@ -10,7 +10,9 @@
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.ObjectPool;
 
-
+    /// <summary>
+    /// Service dedicated to fetching data from an External Python API.
+    /// </summary>
     public class PythonApiService : IPythonApiService
     {
         private readonly ObjectPool<HttpClient> _httpClientPool;
@@ -50,7 +52,7 @@
             {
                 return await _cache.GetOrCreateAsync($"holdings_{portfolioName}", async entry =>
                 {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5); // Cache for 5 minutes
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5); 
                     string holdingsResponse = await client.GetStringAsync($"{portfolioName}/holdings");
                     return JsonConvert.DeserializeObject<List<Holding>>(holdingsResponse);
                 });
@@ -72,7 +74,7 @@
             {
                 return await _cache.GetOrCreateAsync($"cash_{portfolioName}", async entry =>
                 {
-                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5); // Cache for 5 minutes
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                     return await client.GetFromJsonAsync<Cash>($"{portfolioName}/cash");
                 });
             }

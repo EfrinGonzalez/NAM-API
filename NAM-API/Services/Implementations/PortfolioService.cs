@@ -8,6 +8,9 @@
     using System.Threading.Tasks;
     using Microsoft.Extensions.Caching.Memory;
 
+    /// <summary>
+    /// Service dedicated to handling portfolio-related internal operations.
+    /// </summary>
     public class PortfolioService : IPortfolioService
     {
         private readonly IPythonApiService _pythonApiService;
@@ -59,7 +62,7 @@
         {
             return await _cache.GetOrCreateAsync("cashFraction", async entry =>
             {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5); // Cache for 5 minutes
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5); 
                 try
                 {
                     List<Portfolio> portfolios = await _pythonApiService.GetPortfoliosAsync();
